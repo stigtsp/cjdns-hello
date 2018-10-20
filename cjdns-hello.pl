@@ -32,6 +32,16 @@ helper 'rpc_auth' => sub {
     return $rpc->_sync_call($query);
 };
 
+helper 'ip_type' => sub {
+    my ($c, $in) = @_;
+    for ($in) {
+        return 'cjdns' if /^fc/;
+        return 'ip4' if /^\d+\.\d+\.\d+\.\d+/;
+        #return 'ip6';
+        return 'unknown';
+    }
+};
+
 
 helper 'color' => sub {
     return 'lightyellow';
@@ -72,19 +82,17 @@ __DATA__
 % layout 'default';
 % title 'Welcome';
 <div class="box blue right" style="text-align:right">
-  You're connecting from <br><b><%= $c->tx->remote_address %></b>
+  Your browser is connecting from <br><b><%= $c->tx->remote_address %></b> <%= ip_type $c->tx->remote_address %>
   </div>
 
 % my $ip = stash('me')->{bestParent}->{ip};
 % my ($short2,$short) = $ip =~ m/([a-f0-9]{4})\:([a-f0-9]{4})$/;
 
-<h1><a href="">hyperboria</a> node
+<h1><strong><%= $short %></strong> <span class="muted">cjdns mesh node</span></h1>
 
-<strong style="font-weight:normal;color:#999;"><%= $short2 %>:</strong><strong><%= $short %></strong>
-</strong></h1>
-
-<div class="box green">
-<strong><%= $ip %></strong>
+  <div class="box green">
+  The node this page is running on:<br>
+<strong><%= $ip %> <%= ip_type $ip %></strong>
   %#== dumper rpc_auth('ipTunnel_listConnections');
 </div>
 
@@ -99,7 +107,8 @@ __DATA__
 <pre>
 </pre>
 
-<pre> <%#= dumper rpc->Admin_availableFunctions %></pre>
+<h2>API Methods</h2>
+<%== table([map {{method => $_ }} sort keys %{rpc->Admin_availableFunctions}]) %>
 
 
 @@ layouts/default.html.ep
@@ -115,6 +124,9 @@ table tr:first-child {
 .right {
     float:right;
   }
+.muted {
+color: #bbb;
+}
   h1 {
 
 }
@@ -126,9 +138,13 @@ table tr:first-child {
   a {color: #666; }
   .blue { background-color: #efefff; }
   .green { background-color: #efffff; }
-  .box {  min-width:50%; border: 1px solid black; padding:1em; }
+  .box { border: 1px solid black; padding:1em; }
   </style>
   </head>
-  <body><%= content %></body>
+  <body>
+     <%= content %>
+     <hr>
+     <div class="right muted"><a href="https://github.com/stigtsp/cjdns-hello">cjdns-hello</a></div>
+  </body>
 </html>
 
