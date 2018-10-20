@@ -1,0 +1,3 @@
+[submodule "lib/cjdns_tool"]
+	path = lib/cjdns_tool
+	url = https://github.com/stigtsp/cjdns_tool
