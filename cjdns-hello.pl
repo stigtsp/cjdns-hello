@@ -107,15 +107,22 @@ __DATA__
 <html>
   <head><title><%= title %></title>
   <style>
-  .right {
+table tr:first-child {
+  font-weight:bold;
+  font-style:italic;
+  font-color:#666;
+}
+.right {
     float:right;
   }
   h1 {
 
 }
   * { color: #333; font-family: "Courier New" !important; }
-  strong { font-size:1.5em; text-shadow: 0px 0px 6px rgba(199,240,255,0.7);
-}
+  strong {
+    font-size:1.5em;
+    text-shadow: 0px 0px 6px rgba(199,240,255,0.7);
+  }
   a {color: #666; }
   .blue { background-color: #efefff; }
   .green { background-color: #efffff; }

@@ -1,10 +1,10 @@
 build: deps
-	fatpack file hyp-welcome.pl > hyp-welcome
-	chmod +x hyp-welcome
-	echo "=== run ./hyp-welcome daemon to start ==="
+	fatpack file cjdns-hello.pl > cjdns-hello
+	chmod +x cjdns-hello
+	echo "=== run ./cjdns-hello daemon to start ==="
 
 deps:
 	cpanm --installdeps .
 
 run:
-	morbo -w . -l http://\*:14220 hyp-welcome.pl
+	morbo -w . -l http://\*:8080 cjdns-hello.pl
