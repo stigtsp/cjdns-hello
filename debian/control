@@ -1,0 +1,12 @@
+Source: cjdns-hello
+Priority: optional
+Maintainer: Stig <stig@stig.io>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 4.3.0.1
+Vcs-Git: https://github.com/stigtsp/cjdns-hello/
+
+Package: cjdns-hello
+Architecture: all
+Depends: cjdnstool, libmojolicious-perl, perl-base
+Recommends: cjdns 
+Description: Friendly status page for running on cjdns nodes, displays helpful information etc.
