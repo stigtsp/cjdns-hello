@@ -1,0 +1,21 @@
+dist: xenial
+sudo: enabled
+language: minimal
+
+install:
+  - sudo apt-get update -y
+  - sudo apt-get install -y cpanminus fatpack
+
+script:
+  - make deb
+
+deploy:
+  - provider: releases
+    api_key:
+      secure: Z7j3XR1EANaFnG1X0UXKkkkECvoi+rWwg/UX4nGZ3P6NRDsyyJ7eXLTOoTQKKsyZSxUdmLMOB2Q0Q41oxitx3D7mTENQQLKFLwr693sysFaO4CoddlRoLcEu35cbBUIBpIRt9BSTDC4BOcvKeYkenU5sLWwx0pOMr3NhpwQySTI5dumg9FOibO4nsHKtnJOO5+SG2wKraeSoV3IQAM4jkcwVCsrko3jdQpJL6O7RcGuZxrtKCf5BVSfyaPQO8OQ9cfk3rGZvEBnzwWlTRnjWyF3zvMpc/RtK0bb1Irwfnt0311GULL+sgMXExijukpHSy6SRi3mpP2DZwIS6P1GmH6tcq+DfwXDSUXFCb5hGcaUePN4YL+MHKfJuTgr9FbL0qesImGAR+wl5RJtY8Kmi3TI4/sqQ2uEVxznaEpRDmvn5FJ6Ji3g+EwlpZtWSB0HHJQxhpmWc6hLkOtn6wZLxbAsdZboOIMIikxaiK3hahY69YANJdXe3PC5atHp2/gl8ulcmRgqCkFv5ZnuDZr8EYE1sJIxGZpgeBHQc23JLFR+pMUoizaDSqX6aUpIsHbCHA26rtQHRBpeZ/zv7zGRrwshD8Fn8QdteCvo7U1Pn4MClPqwy4ukOtoYFFOcLcBeo9n7VsDuCxZY+rd+5jb2ySEp+PfFKK/Yu1vakjHZLNlY=
+    file_glob: true
+    file: output/*
+    skip_cleanup: true
+    on:
+      repo: benhylau/cjdns-hello
+      tags: true

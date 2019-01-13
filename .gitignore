@@ -1,2 +1,9 @@
 cjdns-hello
+debian/*.debhelper.log
+debian/*.substvars
+debian/changelog
+debian/debhelper-build-stamp
+debian/files
+installdir/
 log/
+output/
