@@ -2,6 +2,7 @@ NAME := cjdns-hello
 INSTALLROOT ?= installdir
 INSTALLBIN := $(INSTALLROOT)/usr/bin
 INSTALLLIB := $(INSTALLROOT)/usr/share/perl5
+INSTALLSYS := $(INSTALLROOT)/etc/systemd/system
 OUTPUTROOT := output
 
 describe := $(shell git describe --tags --long --dirty)
@@ -21,9 +22,10 @@ clean:
 	rm -rf $(OUTPUTROOT)
 
 install: build
-	mkdir -p $(INSTALLBIN) $(OUTPUTROOT)
+	mkdir -p $(INSTALLBIN) $(INSTALLSYS) $(OUTPUTROOT)
 	cp -pr cjdns-hello $(INSTALLBIN)
-
+	cp -pr systemd/cjdns-hello.service $(INSTALLSYS)
+ 
 deb: $(debfile)
 
 $(debfile): debian/changelog

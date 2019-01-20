@@ -1,0 +1,14 @@
+[Unit]
+Description=infoweb for cjdns nodes
+Wants=network.target
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/cjdns-hello daemon
+ExecStop=/usr/bin/pkill -f cjdns-hello
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
